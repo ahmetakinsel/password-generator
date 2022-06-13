@@ -12,7 +12,7 @@ import {
 } from "./Layout/index";
 import { Button } from "./Button/Button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { ToastContainer, toast, Slide, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const numbers = "0123456789";
@@ -98,19 +98,9 @@ const GeneratePassword = () => {
   };
 
   const errorToast = () => {
-    //hiçbiri seçili değilsa option seç
-    if (!includeLetters && !includeNumbers && !includeSymbols) {
+    if (length > 0 && !includeLetters && !includeNumbers && !includeSymbols) {
       toast.error("You must select at least one option", {
         position: "top-center",
-      });
-    }
-  };
-
-  const handleCheckOptions = () => {
-    //lenght varsa option seç
-    if (length > 0) {
-      toast.success("Select at least one option", {
-        position: toast.POSITION.BOTTOM_CENTER,
       });
     }
   };
@@ -139,10 +129,15 @@ const GeneratePassword = () => {
               <Button
                 type="submit"
                 style={{ backgroundColor: length > 0 ? "#ADEFD1" : "grey" }}
-                //onClick={handleCheckbox}
+                onClick={() => {
+                  errorToast();
+                }}
               >
                 Generate Password <AiFillLock />
               </Button>
+              {length > 0 && (
+                <ToastContainer transition={Zoom} autoClose={2000} limit={1} />
+              )}
               <CopyToClipboard text={password}>
                 <Button
                   style={{ backgroundColor: length > 0 ? "#ADEFD1" : "grey" }}

@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 80px;
   margin-bottom: 20px;
 `;
 
