@@ -35,3 +35,13 @@ export const Button = styled.button`
     transform: translateY(-2px);
   }
 `;
+
+export const GeneratorButton = (props) => {
+  return (
+    <>
+      <Button style={props.style} onClick={props.onClick}>
+        {props.title}
+      </Button>
+    </>
+  );
+};
