@@ -1,16 +1,6 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { AiFillLock } from "react-icons/ai";
-import {
-  Container,
-  HeaderWrapper,
-  FormWrapper,
-  InputWrapper,
-  LengthWrapper,
-  ButtonWrapper,
-  CheckboxWrapper,
-} from "./Layout/index";
-import { Button } from "./Button/Button";
+import { Button, GeneratorButton } from "./Button/Button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { ToastContainer, toast, Slide, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,37 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 const numbers = "0123456789";
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const symbols = "0123456789!'^+%&/()=?_#$½§{[]}|;:>÷`<.*-@é";
-
-const Header = styled.h1`
-  font-size: 24px;
-  text-align: center;
-  color: #adefd1;
-`;
-
-const Label = styled.label`
-  margin-right: 5px;
-  color: #adefd1;
-  font-size: 16px;
-`;
-
-const EnterLength = styled.input`
-  width: 210px;
-  height: 30px;
-  border-radius: 5px;
-  border: 1px solid #0a6bff;
-`;
-const Generator = styled.textarea`
-  width: 400px;
-  height: 100px;
-  border-radius: 5px;
-  border: 1px solid #0a6bff;
-`;
-
-const RadioButton = styled.input`
-  margin-top: 1px;
-  width: 12px;
-  height: 12px;
-`;
 
 const GeneratePassword = () => {
   const [length, setLength] = useState("");
@@ -107,34 +66,43 @@ const GeneratePassword = () => {
 
   return (
     <>
-      <Container>
-        <HeaderWrapper>
-          <Header>Random Password Generator</Header>
-        </HeaderWrapper>
-        <FormWrapper>
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex justify-center mt-20 mb-8">
+          <h3 className="text-center text-light text-2xl">
+            Random Password Generator
+          </h3>
+        </div>
+        <div className="flex flex-col justify-center items-center">
           <form onSubmit={handleGeneratePassword}>
-            <InputWrapper>
-              <LengthWrapper>
-                <Label>Choose Password Length: </Label>
-                <EnterLength
+            <div className="flex flex-col">
+              <div className="flex items-center mb-4">
+                <label className="mr-1 text-light text-base">
+                  Choose Password Length:
+                </label>
+                <input
+                  className="w-52 h-8 rounded border-border"
                   value={length}
                   onChange={(e) => setLength(e.target.value)}
                   placeholder="Ex: 18"
                   type="text"
                 />
-              </LengthWrapper>
-              <Generator value={password} />
-            </InputWrapper>
-            <ButtonWrapper>
-              <Button
+              </div>
+              <textarea
+                className="w-70 h-32 rounded border-border"
+                value={password}
+              />
+            </div>
+            <div className="flex justify-center my-5 gap-5">
+              <GeneratorButton
                 type="submit"
+                title="Generate Password"
                 style={{ backgroundColor: length > 0 ? "#ADEFD1" : "grey" }}
                 onClick={() => {
                   errorToast();
                 }}
               >
-                Generate Password <AiFillLock />
-              </Button>
+                <AiFillLock />
+              </GeneratorButton>
               {length > 0 && (
                 <ToastContainer transition={Zoom} autoClose={2000} limit={1} />
               )}
@@ -154,35 +122,38 @@ const GeneratePassword = () => {
               {copied && (
                 <ToastContainer transition={Slide} autoClose={2000} limit={1} />
               )}
-            </ButtonWrapper>
-            <CheckboxWrapper>
-              <RadioButton
+            </div>
+            <div className="flex items-center justify-center gap-2">
+              <input
+                className="mt-px w-3 h-3"
                 type="radio"
                 checked={includeLetters}
                 onChange={(e) => setIncludeLetters(e.target.checked)}
                 name="letters"
               />
-              <Label>Add Letters</Label>
+              <label className="mr-1 text-light text-base">Add Letters</label>
 
-              <RadioButton
+              <input
+                className="mt-px w-3 h-3"
                 type="radio"
                 checked={includeNumbers}
                 onChange={(e) => setIncludeNumbers(e.target.checked)}
                 id="include-numbers"
                 name="include-numbers"
               />
-              <Label>Add Numbers</Label>
-              <RadioButton
+              <label className="mr-1 text-light text-base">Add Numbers</label>
+              <input
+                className="mt-px w-3 h-3"
                 type="radio"
                 checked={includeSymbols}
                 onChange={(e) => setIncludeSymbols(e.target.checked)}
                 name="include-symbols"
               />
-              <Label>Add Symbols</Label>
-            </CheckboxWrapper>
+              <label className="mr-1 text-light text-base">Add Symbols</label>
+            </div>
           </form>
-        </FormWrapper>
-      </Container>
+        </div>
+      </div>
     </>
   );
 };
