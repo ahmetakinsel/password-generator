@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillLock } from "react-icons/ai";
 import { Button, GeneratorButton } from "./Button/Button";
+import Label from "./Label/Label";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { ToastContainer, toast, Slide, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -131,7 +132,7 @@ const GeneratePassword = () => {
                 onChange={(e) => setIncludeLetters(e.target.checked)}
                 name="letters"
               />
-              <label className="mr-1 text-light text-base">Add Letters</label>
+              <Label title="Add Letters" />
 
               <input
                 className="mt-px w-3 h-3"
@@ -141,7 +142,7 @@ const GeneratePassword = () => {
                 id="include-numbers"
                 name="include-numbers"
               />
-              <label className="mr-1 text-light text-base">Add Numbers</label>
+              <Label title="Add Numbers" />
               <input
                 className="mt-px w-3 h-3"
                 type="radio"
@@ -149,7 +150,7 @@ const GeneratePassword = () => {
                 onChange={(e) => setIncludeSymbols(e.target.checked)}
                 name="include-symbols"
               />
-              <label className="mr-1 text-light text-base">Add Symbols</label>
+              <Label title="Add Symbols" />
             </div>
           </form>
         </div>
