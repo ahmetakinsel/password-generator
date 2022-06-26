@@ -129,28 +129,30 @@ const GeneratePassword = () => {
                 className="mt-px w-3 h-3"
                 type="radio"
                 checked={includeLetters}
-                onChange={(e) => setIncludeLetters(e.target.checked)}
-                name="letters"
+                onClick={() => setIncludeLetters(!includeLetters)}
+                name="include-letters"
+                id="include-letters"
               />
-              <Label title="Add Letters" />
+              <Label title="Add Letters" for="include-letters" />
 
               <input
                 className="mt-px w-3 h-3"
                 type="radio"
                 checked={includeNumbers}
-                onChange={(e) => setIncludeNumbers(e.target.checked)}
+                onClick={() => setIncludeNumbers(!includeNumbers)}
                 id="include-numbers"
                 name="include-numbers"
               />
-              <Label title="Add Numbers" />
+              <Label title="Add Numbers" for="add-numbers" />
               <input
                 className="mt-px w-3 h-3"
                 type="radio"
                 checked={includeSymbols}
-                onChange={(e) => setIncludeSymbols(e.target.checked)}
+                onClick={() => setIncludeSymbols(!includeSymbols)}
                 name="include-symbols"
+                id="include-symbols"
               />
-              <Label title="Add Symbols" />
+              <Label title="Add Symbols" for="add-symbols" />
             </div>
           </form>
         </div>
